@@ -49,6 +49,9 @@ public:
   int resume();
   int getRawFrame(uint8_t **bayerFrame);
   
+  uint8_t getUSBBus();
+  size_t getUSBPorts(uint8_t* out, size_t size);
+
 private:
   Chirp *m_chirp;
   USBLink *m_link;

@@ -186,4 +186,14 @@ int Link2USB::getRawFrame(uint8_t **bayerFrame)
   return response;
 }
 	     
+uint8_t Link2USB::getUSBBus() {
+  auto device = libusb_get_device(m_link->m_handle);
 
+  return libusb_get_bus_number(device);
+}
+
+size_t Link2USB::getUSBPorts(uint8_t* out, size_t size) {
+  auto device = libusb_get_device(m_link->m_handle);
+
+  return (size_t) libusb_get_port_numbers(device, out, (int)size);
+}

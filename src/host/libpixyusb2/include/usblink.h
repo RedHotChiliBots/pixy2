@@ -33,10 +33,11 @@ public:
     virtual void setTimer();
     virtual uint32_t getTimer();
 
+    libusb_device_handle *m_handle;
+
 private:
     int openDevice();
     libusb_context *m_context;
-    libusb_device_handle *m_handle;
     uint32_t m_timer;
 };
 #endif
