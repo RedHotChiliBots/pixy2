@@ -79,25 +79,28 @@ int USBLink::openDevice()
             #endif
                 if (libusb_set_configuration(m_handle, 1)<0)
                 {
+                    log("Pixy: Cannot set configuration.");
                     libusb_close(m_handle);
                     m_handle = 0;
                     continue;
                 }
                 if (libusb_claim_interface(m_handle, 1)<0)
                 {
+                    log("Pixy: Cannot claim device.");   
                     libusb_close(m_handle);
                     m_handle = 0;
                     continue;
                 }
-#ifdef __LINUX__
                 libusb_reset_device(m_handle);
-#endif
-                break;
+                libusb_free_device_list(list, 1);
+
+                return 0;
             }
         }
     }
     libusb_free_device_list(list, 1);
     if (i==count) // no devices found
+        log("Pixy: No devices found.");
         return -1;
     return 0;
 }

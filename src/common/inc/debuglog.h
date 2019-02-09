@@ -20,12 +20,13 @@
 
 static void log(const char *format, ...)
 {
-#ifdef DEBUG
+#ifndef NDEBUG
   va_list elements;
 
   // Send debug message to stdout //
   va_start(elements, format);
   vprintf(format, elements);
+  printf("\n");
   fflush(stdout);
   va_end(elements);
 #endif 
